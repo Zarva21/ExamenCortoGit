@@ -25,7 +25,7 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.Empleado = require('../models/empleado.model.js')(sequelize, Sequelize);
-db.Departamento = require('../models/departamento.model.js')(sequelize, Sequelize);    
+db.Empleados = require('../models/empleado.model.js')(sequelize, Sequelize);
+db.Departamentos = require('../models/departamento.model.js')(sequelize, Sequelize);    
 
 module.exports = db;
