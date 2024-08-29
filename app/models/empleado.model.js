@@ -28,10 +28,7 @@ module.exports = (sequelize, Sequelize) => {
         },
         ID_DEPARTAMENTO: {
             type: Sequelize.INTEGER,
-            references: {
-                model: 'departamentos', 
-                key: 'ID_DEPARTAMENTO'
-            }
+            
         }
     });
 
