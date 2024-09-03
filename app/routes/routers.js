@@ -5,6 +5,8 @@ const router = express.Router();
 const departamento = require('../controllers/departamento.controller.js');
 const empleado = require('../controllers/empleado.controller.js');
 const cliente = require('../controllers/cliente.controller.js');
+const proveedor = require('../controllers/proveedor.controller.js');
+
 
 
 // Departamento routes
@@ -25,7 +27,11 @@ router.put('/api/clientes/update/:id', cliente.updateById);
 router.delete('/api/clientes/delete/:id', cliente.deleteById);
 router.get('/api/clientes/all', cliente.retrieveAllClientes);
 
-
+// Proveedor routes
+router.post('/api/proveedores/create', proveedor.create);
+router.put('/api/proveedores/update/:id', proveedor.updateById);
+router.delete('/api/proveedores/delete/:id', proveedor.deleteById);
+router.get('/api/proveedores/all', proveedor.retrieveAllProveedores);
 
 
 module.exports = router;
