@@ -6,7 +6,7 @@ const departamento = require('../controllers/departamento.controller.js');
 const empleado = require('../controllers/empleado.controller.js');
 const cliente = require('../controllers/cliente.controller.js');
 const proveedor = require('../controllers/proveedor.controller.js');
-
+const producto = require('../controllers/producto.controller.js');
 
 
 // Departamento routes
@@ -33,5 +33,10 @@ router.put('/api/proveedores/update/:id', proveedor.updateById);
 router.delete('/api/proveedores/delete/:id', proveedor.deleteById);
 router.get('/api/proveedores/all', proveedor.retrieveAllProveedores);
 
+// Producto routes
+router.post('/api/productos/create', producto.create);
+router.put('/api/productos/update/:id', producto.updateById);
+router.delete('/api/productos/delete/:id', producto.deleteById);
+router.get('/api/productos/all', producto.retrieveAllProductos);
 
 module.exports = router;
