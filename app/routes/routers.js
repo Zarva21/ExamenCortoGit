@@ -7,7 +7,7 @@ const empleado = require('../controllers/empleado.controller.js');
 const cliente = require('../controllers/cliente.controller.js');
 const proveedor = require('../controllers/proveedor.controller.js');
 const producto = require('../controllers/producto.controller.js');
-
+const factura = require('../controllers/factura.controller.js');
 
 // Departamento routes
 router.post('/api/departamentos/create', departamento.create);
@@ -38,5 +38,13 @@ router.post('/api/productos/create', producto.create);
 router.put('/api/productos/update/:id', producto.updateById);
 router.delete('/api/productos/delete/:id', producto.deleteById);
 router.get('/api/productos/all', producto.retrieveAllProductos);
+
+
+// Factura routes
+router.post('/api/facturas/create', factura.create);
+router.put('/api/facturas/update/:id', factura.updateById);
+router.delete('/api/facturas/delete/:id', factura.deleteById);
+router.get('/api/facturas/all', factura.retrieveAllFacturas);
+
 
 module.exports = router;
