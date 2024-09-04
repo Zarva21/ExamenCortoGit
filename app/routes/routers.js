@@ -8,6 +8,8 @@ const cliente = require('../controllers/cliente.controller.js');
 const proveedor = require('../controllers/proveedor.controller.js');
 const producto = require('../controllers/producto.controller.js');
 const factura = require('../controllers/factura.controller.js');
+const facturaDetalle = require('../controllers/factura_detalle.controller.js');
+
 
 // Departamento routes
 router.post('/api/departamentos/create', departamento.create);
@@ -45,6 +47,14 @@ router.post('/api/facturas/create', factura.create);
 router.put('/api/facturas/update/:id', factura.updateById);
 router.delete('/api/facturas/delete/:id', factura.deleteById);
 router.get('/api/facturas/all', factura.retrieveAllFacturas);
+
+
+// FacturaDetalle routes
+router.post('/api/factura-detalles/create', facturaDetalle.create);
+router.put('/api/factura-detalles/update/:idFactura/:idLinea', facturaDetalle.updateById);
+router.delete('/api/factura-detalles/delete/:idFactura/:idLinea', facturaDetalle.deleteById);
+router.get('/api/factura-detalles/all', facturaDetalle.retrieveAllFacturaDetalles);
+
 
 
 module.exports = router;
