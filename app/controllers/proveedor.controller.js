@@ -95,7 +95,7 @@ exports.deleteById = async (req, res) => {
         }
     } catch (error) {
         res.status(500).json({
-            message: "Error al eliminar el proveedor con id = " + req.params.id,
+            message: "Error al eliminar el proveedor con id == " + req.params.id,
             error: error.message,
         });
     }
