@@ -26,6 +26,8 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 db.Usuarios = require('../models/users.model.js')(sequelize, Sequelize);
+db.Proyectos = require('../models/projects.model.js')(sequelize, Sequelize);
+db.Tareas = require('../models/tasks.model.js')(sequelize, Sequelize);
 
 
 
