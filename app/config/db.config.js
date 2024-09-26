@@ -25,7 +25,7 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.Usuarios = require('../models/users.model.js')(sequelize, Sequelize.prototype);
+db.Usuarios = require('../models/users.model.js')(sequelize, Sequelize);
 
 
 
