@@ -1,8 +1,8 @@
 const env = {
-    database: 'db_clases_progra_tdsy',
+    database: 'db_clases_progra_tdsy_ku4y',
     username: 'db_clases_progra_user',
-    password: '9zeStIkHTKZPnKK3ELEhXmcv5rVcZxf4',
-    host: 'dpg-cr6jn5ij1k6c73d5epo0-a',
+    password: 'K5kiENWHhNnlCiCLbRZsNcXADIWKhMA8',
+    host: 'dpg-crqdqag8fa8c7390h2k0-a.oregon-postgres.render.com',
     port: '5432',
     dialect: 'postgres',
 
