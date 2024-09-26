@@ -1,5 +1,5 @@
 const db = require('../config/db.config.js');
-const User = db.Users;
+const User = db.Usuarios;
 
 exports.create = (req, res) => {
     let user = {};
