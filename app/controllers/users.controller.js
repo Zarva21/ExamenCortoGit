@@ -5,13 +5,13 @@ exports.create = (req, res) => {
     let user = {};
 
     try {
-        user.username = req.body.username;
-        user.email = req.body.email;
-        user.password = req.body.password;
+        user.nombre_usuario = req.body.nombre_usuario; // Cambiado aquí
+        user.correo_usuario = req.body.correo_usuario; // Cambiado aquí
+        user.contraseña_usuario = req.body.contraseña_usuario; // Cambiado aquí
 
         User.create(user).then(result => {
             res.status(200).json({
-                message: "User created successfully with id = " + result.id,
+                message: "User created successfully with id = " + result.id_usuario, // Cambiado aquí
                 user: result,
             });
         });
@@ -36,11 +36,11 @@ exports.updateById = async (req, res) => {
             });
         } else {
             let updatedObject = {
-                username: req.body.username,
-                email: req.body.email,
-                password: req.body.password
+                nombre_usuario: req.body.nombre_usuario, // Cambiado aquí
+                correo_usuario: req.body.correo_usuario, // Cambiado aquí
+                contraseña_usuario: req.body.contraseña_usuario // Cambiado aquí
             };
-            let result = await User.update(updatedObject, { returning: true, where: { id: userId } });
+            let result = await User.update(updatedObject, { returning: true, where: { id_usuario: userId } }); // Cambiado aquí
 
             if (!result) {
                 res.status(500).json({
