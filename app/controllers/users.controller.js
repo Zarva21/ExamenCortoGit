@@ -1,105 +1,100 @@
 const db = require('../config/db.config.js');
-const User = db.Usuarios;
+const Usuario = db.Usuarios;  
 
-exports.create = (req, res) => {
-    let user = {};
-
+// Crear un nuevo usuario
+exports.create = async (req, res) => {
     try {
-        user.nombre_usuario = req.body.nombre_usuario; // Cambiado aquí
-        user.correo_usuario = req.body.correo_usuario; // Cambiado aquí
-        user.contraseña_usuario = req.body.contraseña_usuario; // Cambiado aquí
+        const { nombre_usuario, correo_usuario, contraseña_usuario } = req.body;
 
-        User.create(user).then(result => {
-            res.status(200).json({
-                message: "User created successfully with id = " + result.id_usuario, // Cambiado aquí
-                user: result,
-            });
+        const nuevoUsuario = {
+            nombre_usuario,
+            correo_usuario,
+            contraseña_usuario,
+            fecha_creacion_usuario: new Date()
+        };
+
+
+        const usuarioCreado = await Usuario.create(nuevoUsuario);
+        res.status(201).json({
+            message: "Usuario creado exitosamente",
+            usuario: usuarioCreado
         });
     } catch (error) {
         res.status(500).json({
-            message: "Error!",
+            message: "Error al crear usuario",
             error: error.message
         });
     }
 };
 
+// Actualizar un usuario por ID
 exports.updateById = async (req, res) => {
     try {
-        let userId = req.params.id;
-        let user = await User.findByPk(userId);
+        const id_usuario = req.params.id;
+        const { nombre_usuario, correo_usuario, contraseña_usuario } = req.body;
 
-        if (!user) {
-            res.status(404).json({
-                message: "User not found with id = " + userId,
-                user: "",
+        const usuario = await Usuario.findByPk(id_usuario);
+        if (!usuario) {
+            return res.status(404).json({
+                message: `Usuario con id ${id_usuario} no encontrado`,
                 error: "404"
             });
-        } else {
-            let updatedObject = {
-                nombre_usuario: req.body.nombre_usuario, // Cambiado aquí
-                correo_usuario: req.body.correo_usuario, // Cambiado aquí
-                contraseña_usuario: req.body.contraseña_usuario // Cambiado aquí
-            };
-            let result = await User.update(updatedObject, { returning: true, where: { id_usuario: userId } }); // Cambiado aquí
-
-            if (!result) {
-                res.status(500).json({
-                    message: "Error updating user with id = " + userId,
-                    error: "Failed to update",
-                });
-            }
-
-            res.status(200).json({
-                message: "User updated successfully with id = " + userId,
-                user: updatedObject,
-            });
         }
+
+        usuario.nombre_usuario = nombre_usuario;
+        usuario.correo_usuario = correo_usuario;
+        usuario.contraseña_usuario = contraseña_usuario;
+
+        await usuario.save();
+        res.status(200).json({
+            message: `Usuario con id ${id_usuario} actualizado exitosamente`,
+            usuario: usuario
+        });
     } catch (error) {
         res.status(500).json({
-            message: "Error updating user with id = " + req.params.id,
+            message: "Error al actualizar el usuario",
             error: error.message
         });
     }
 };
 
+// Eliminar un usuario por ID
 exports.deleteById = async (req, res) => {
     try {
-        let userId = req.params.id;
-        let user = await User.findByPk(userId);
+        const id_usuario = req.params.id;
+        const usuario = await Usuario.findByPk(id_usuario);
 
-        if (!user) {
-            res.status(404).json({
-                message: "User not found with id = " + userId,
-                error: "404",
-            });
-        } else {
-            await user.destroy();
-            res.status(200).json({
-                message: "User deleted successfully with id = " + userId,
-                user: user,
+        if (!usuario) {
+            return res.status(404).json({
+                message: `Usuario con id ${id_usuario} no encontrado`,
+                error: "404"
             });
         }
+
+        await usuario.destroy();
+        res.status(200).json({
+            message: `Usuario con id ${id_usuario} eliminado exitosamente`
+        });
     } catch (error) {
         res.status(500).json({
-            message: "Error deleting user with id = " + req.params.id,
-            error: error.message,
+            message: "Error al eliminar el usuario",
+            error: error.message
         });
     }
 };
 
-exports.retrieveAllUsers = (req, res) => {
-    User.findAll()
-        .then(userInfos => {
-            res.status(200).json({
-                message: "All users retrieved successfully!",
-                users: userInfos
-            });
-        })
-        .catch(error => {
-            console.log(error);
-            res.status(500).json({
-                message: "Error!",
-                error: error
-            });
+// Obtener todos los usuarios
+exports.retrieveAllUsers = async (req, res) => {
+    try {
+        const usuarios = await Usuario.findAll();
+        res.status(200).json({
+            message: "Todos los usuarios recuperados exitosamente",
+            usuarios: usuarios
         });
+    } catch (error) {
+        res.status(500).json({
+            message: "Error al recuperar usuarios",
+            error: error.message
+        });
+    }
 };
