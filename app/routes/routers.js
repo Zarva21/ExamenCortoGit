@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const usuario = require('../controllers/users.controller.js');
+const User = require('../controllers/users.controller.js');
 const Proyecto = require('../controllers/projects.controller.js');
 const Tarea = require('../controllers/tasks.controller.js');
 
