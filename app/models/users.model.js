@@ -17,6 +17,6 @@ const Usuario = sequelize.define('usuario', {
         type: Sequelize.DATE
     }
 });
-
+//
 return Usuario;
 };
